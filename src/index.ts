@@ -19,7 +19,7 @@ import qconf from 'node-qconf'
 import path from 'path'
 import { MysqlConfig, Configs } from 'config'
 
-export default class {
+export class Qconf {
   public flag: string
 
   public qconf = qconf
