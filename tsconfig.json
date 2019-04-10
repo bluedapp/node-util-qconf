@@ -3,7 +3,7 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "declaration": true,
-    "target": "es5",
+    "target": "es2017",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
@@ -16,7 +16,7 @@
       ]
     },
     "lib": [
-      "es5"
+      "es2017"
     ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
