@@ -2,10 +2,10 @@
   "name": "@blued/qconf",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "build": "rm -rf dist && tsc",
+    "install": "rm -rf dist && tsc",
     "watch": "tsc -w",
     "lint": "bash ./scripts/lint-staged-files.sh",
     "start": "NODE_ENV=test node dist",
