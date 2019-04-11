@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai'
-import Qconf from '../src'
+import { Qconf } from '../src'
 
 const mysql = {
   pay: '/blued/backend/udb/pay_oversea',
@@ -27,10 +27,22 @@ describe('normal', () => {
     path: {
       qconf: path.hermes,
     },
+    redisString: redis.live,
+    mysqlString: mysql.pay,
+    pathString: path.hermes,
   })
 
   it(`get host`, done => {
     const res = qconf.getHost('path')
+
+    if (res != null) {
+      expect(res).to.be.a('string')
+    }
+    done()
+  })
+
+  it(`get string host`, done => {
+    const res = qconf.getHost('pathString')
 
     if (res != null) {
       expect(res).to.be.a('string')
@@ -47,8 +59,26 @@ describe('normal', () => {
     done()
   })
 
+  it(`get string mysql conf`, done => {
+    try {
+      qconf.getMysqlConf('mysqlString')
+    } catch (e) {
+      expect(/can not get mysql conf with string config field: \[mysqlString\]/.test(e.message)).to.equal(true)
+      done()
+    }
+  })
+
   it(`get redis conf`, done => {
     const res = qconf.getRedisConf('redis')
+
+    if (res != null) {
+      expect(res).to.has.keys(['host', 'port'])
+    }
+    done()
+  })
+
+  it(`get string redis conf`, done => {
+    const res = qconf.getRedisConf('redisString')
 
     if (res != null) {
       expect(res).to.has.keys(['host', 'port'])

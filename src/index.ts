@@ -17,7 +17,7 @@
 
 import qconf from 'node-qconf'
 import path from 'path'
-import { MysqlConfig, Configs } from 'config'
+import { Configs } from 'config'
 
 export class Qconf {
   public flag: string
@@ -43,7 +43,7 @@ export class Qconf {
    * @param   {string} key        配置标识
    * @returns {(null|string)}
    */
-  private getQconfMapConfig = this.validateQconfMap((_: any, configItem: MysqlConfig) => configItem)
+  private getQconfMapConfig = this.validateQconfMap((_: any, configItem: any) => configItem)
 
   constructor (
     public configs: Configs,
@@ -99,7 +99,11 @@ export class Qconf {
    * @return  {MysqlConf}
    */
   public getMysqlConf = (key: string) => {
-    const { database, qconf: qconfPath, modelPath } = this.getQconfMapConfig(key)
+    const configItem = this.getQconfMapConfig(key)
+
+    if (typeof configItem !== 'object') throw new Error(`can not get mysql conf with string config field: [${key}]`)
+
+    const { database, qconf: qconfPath, modelPath } = configItem
     const addQconfPrePath = path.join.bind(null, qconfPath)
 
     // 获取固定的 qconf 路径，用于拼接 mysql 配置使用的特殊 path
@@ -137,15 +141,19 @@ export class Qconf {
    * qconfPath 作为第一个参数传入，第二个参数为完整的configItem
    * @param {Function} accessCallback 校验成功后的函数调用
    */
-  private validateQconfMap (accessCallback: Function) {
+  private validateQconfMap (accessCallback: (qconf: string, configItem: any) => any) {
     return (key: string) => {
       if (!(key in this.configs)) throw new Error(`can not found conf with key: [${key}]`)
 
       const configItem = this.configs[key]
 
-      const {
-        qconf: qconfPath,
-      } = configItem
+      let qconfPath
+
+      if (typeof configItem === 'object') {
+        qconfPath = configItem.qconf
+      } else {
+        qconfPath = configItem
+      }
 
       if (!qconfPath) throw new Error(`can not found qconf_path with key: [${key}]`)
       return accessCallback(qconfPath, configItem)

@@ -17,7 +17,7 @@ export interface APIConfig {
 }
 
 export interface Configs {
-  [key: string]: {
+  [key: string]: string | {
     qconf: string,
     database?: string,
     modelPath?: string
