@@ -1,6 +1,6 @@
 {
-  "name": "@blued/qconf",
-  "version": "0.2.0",
+  "name": "@blued-core/qconf",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
