@@ -59,9 +59,9 @@ qconf.getHost('key') // => string
 > 根据`qconf`路径获取对应的参数  
 
 ```typescript
-qconf.getConf('/qconf/xxx/key')         // => string
-qconf.getHost('/qconf/xxx/key')         // => string
-qconf.getQconfAllHost('/qconf/xxx/key') // => string[]
+qconf.getQconfConf('/qconf/xxx/key')        // => string
+qconf.getQconfHost('/qconf/xxx/key')        // => string
+qconf.getQconfAllHost('/qconf/xxx/key')     // => string[]
 ```
 
 ### getRedisConf
