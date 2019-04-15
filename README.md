@@ -3,7 +3,7 @@
 基于 qconf 的简易封装。
 
 ```bash
-bnpm install @blued/qconf
+npm install @blued-core/qconf
 ```
 
 ## Usage
