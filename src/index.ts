@@ -19,6 +19,8 @@ import qconf from 'node-qconf'
 import path from 'path'
 import { Configs } from 'config'
 
+const flag = process.env.QCONF_FLAG
+
 export class Qconf {
   public flag: string
 
@@ -47,9 +49,8 @@ export class Qconf {
 
   constructor (
     public configs: Configs,
-    public isLocal: boolean = false
   ) {
-    this.flag = isLocal ? 'production' : ''
+    this.flag = flag || ''
     this.getConf = this.validateQconfMap(this.getQconfConf)
     this.getHost = this.validateQconfMap(this.getQconfHost)
   }
