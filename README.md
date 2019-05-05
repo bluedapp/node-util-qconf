@@ -11,7 +11,7 @@ npm install @blued-core/qconf
 __目前除`mysql`配置以外，其余结构都可以简写为`key: value`，而不需要`key: { qconf: value }`。__  
 
 ```typescript
-import Qconf from '@blued/qconf'
+import { Qconf } from '@blued/qconf'
 
 const configs = {
   mysqlConf: {
@@ -25,22 +25,21 @@ const configs = {
   normalHost: {
     qconf: 'XXX',     // qconf 路径
   },
-  normalConf: {
-    qconf: 'XXX',     // qconf 路径
-  },
+  normalConf: 'XXX',     // qconf 路径
   redisStringConf: 'XXX',
   normalStringHost: 'XXX',
   normalStringConf: 'XXX'
 }
 
-const isLocal = true // 如果需要在本地环境使用线上 qconf 数据，则需要传递一个 boolean 的真值，其他环境下均可忽略该参数
+const qconf = new Qconf(config)
 
-const qconf = new Qconf(config, isLocal)
+// 可选的 flag 参数用于使用不同环境下的配置文件
+qconf.flag = 'production'
 
 qconf.getConf('mysqlConf')
 ```
 
-> 保留 JSON 结构主要是为了后期可能会添加其他的配置，所以没有直接采用 `string`  
+> 除了 MySQL 相关的配置外，其他的都可以直接简写为`key: value` 而不需要携带 `qconf` 属性。
 
 ## API
 
