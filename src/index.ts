@@ -17,7 +17,14 @@
 
 import qconf from 'node-qconf'
 import path from 'path'
-import { Configs } from 'config'
+
+export interface Configs {
+  [key: string]: string | {
+    qconf: string,
+    database?: string,
+    modelPath?: string
+  }
+}
 
 const flag = process.env.QCONF_FLAG
 
