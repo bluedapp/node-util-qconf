@@ -54,7 +54,7 @@ describe('normal', () => {
     const res = qconf.getMysqlConf('mysql')
 
     if (res != null) {
-      expect(res).to.has.keys(['masterHost', 'slaveHost', 'username', 'password', 'database', 'modelPath'])
+      expect(res).to.has.keys(['master', 'slaves', 'username', 'password', 'database', 'modelPath'])
     }
     done()
   })
