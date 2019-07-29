@@ -28,7 +28,7 @@ export interface Configs {
 
 export interface MysqlConfItem {
   host: string
-  port: string | number
+  port: string
 }
 
 const flag = process.env.QCONF_FLAG
