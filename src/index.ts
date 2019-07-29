@@ -26,6 +26,11 @@ export interface Configs {
   }
 }
 
+export interface MysqlConfItem {
+  host: string
+  port: string | number
+}
+
 const flag = process.env.QCONF_FLAG
 
 export class Qconf {
@@ -118,25 +123,40 @@ export class Qconf {
     // addQconfPrePath('master') => /udb/XXX/master
     const masterHostConf = this.getQconfHost(addQconfPrePath('master'))
 
-    const [masterHost] = (masterHostConf || '').split(':')
+    const [masterHost, masterPort] = (masterHostConf || '').split(':')
 
     if (!masterHostConf) throw new Error(`can not found qconf with key: [${key}]`)
 
-    let slaveHost
+    let slaves: MysqlConfItem[] = []
     try {
       const slaveHostConf = this.getQconfAllHost(addQconfPrePath('slave'))
-      slaveHost = slaveHostConf.map(item => item.split(':')[0])
+      const slaveList = slaveHostConf.map(item => item.split(':'))
+
+      slaveList.forEach(([host, port]) => {
+        slaves.push({
+          host,
+          port,
+        })
+      })
     } catch (e) {
       // path have not slave conf
-      slaveHost = [masterHost]
+      slaves = [
+        {
+          host: masterHost,
+          port: masterPort,
+        },
+      ]
     }
 
     const password = this.getQconfConf(addQconfPrePath('password'))
     const username = this.getQconfConf(addQconfPrePath('username'))
 
     return {
-      masterHost,
-      slaveHost,
+      master: {
+        host: masterHost,
+        port: masterPort,
+      },
+      slaves,
       username,
       password,
       database,
