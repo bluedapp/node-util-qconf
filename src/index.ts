@@ -107,6 +107,11 @@ export class Qconf {
   }
 
   /**
+   * 获取 path 下的所有配置
+   */
+  public getBatchKeys = (key: string) => qconf.getBatchKeys(key, this.flag)
+
+  /**
    * 获取 mysql 配置信息
    * @param   {string}    key       qconf地址
    * @return  {MysqlConf}
