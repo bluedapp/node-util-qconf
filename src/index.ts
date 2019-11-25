@@ -15,8 +15,8 @@
  * @property  {string} port      端口号
  */
 
-import qconf from 'node-qconf'
 import path from 'path'
+import { getAllHost, getHost, getConf, getBatchKeys } from './util/command'
 
 export interface Configs {
   [key: string]: string | {
@@ -35,8 +35,6 @@ const flag = process.env.QCONF_FLAG
 
 export class Qconf {
   public flag: string
-
-  public qconf = qconf
 
   /**
    * 根据 key 获取 qconf 对应的 conf
@@ -72,21 +70,21 @@ export class Qconf {
    * @param {string} qconfPath qconf 地址
    * @returns  {(null|string)}
    */
-  public getQconfHost = (qconfPath: string) => qconf.getHost(qconfPath, this.flag)
+  public getQconfHost = (qconfPath: string) => getHost(qconfPath, this.flag)
 
   /**
  * 根据 qconf 路径获取 conf
  * @param   {string} qconfPath qconf 地址
  * @returns  {(null|string)}
  */
-  public getQconfConf = (qconfPath: string) => qconf.getConf(qconfPath, this.flag)
+  public getQconfConf = (qconfPath: string) => getConf(qconfPath, this.flag)
 
   /**
  * 根据 qconf 路径获取 conf
  * @param   {string} qconfPath qconf 地址
  * @returns  {(null|string)}
  */
-  public getQconfAllHost = (qconfPath: string) => qconf.getAllHost(qconfPath, this.flag)
+  public getQconfAllHost = (qconfPath: string) => getAllHost(qconfPath, this.flag)
 
   /**
    * 获取 redis 配置信息
@@ -109,7 +107,7 @@ export class Qconf {
   /**
    * 获取 path 下的所有配置
    */
-  public getBatchKeys = (key: string) => qconf.getBatchKeys(key, this.flag)
+  public getBatchKeys = (key: string) => getBatchKeys(key, this.flag)
 
   /**
    * 获取 mysql 配置信息
