@@ -4,11 +4,13 @@ function execCommand (command: string, path: string, flag?: string) {
   if (!path) throw new Error(`can not get qconf with ${path}`)
 
   try {
+    let result = ''
     if (flag) {
-      return (childProcess.execSync(`qconf ${command} ${path} ${flag}`)).toString()
+      result = (childProcess.execSync(`qconf ${command} ${path} ${flag}`)).toString()
     } else {
-      return (childProcess.execSync(`qconf ${command} ${path}`)).toString()
+      result = (childProcess.execSync(`qconf ${command} ${path}`)).toString()
     }
+    return result.replace(/\n$/, '')
   } catch (e) {
     throw new Error(`can not get qconf with ${path}, message: ${e.message}`)
   }
