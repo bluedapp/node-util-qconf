@@ -1,6 +1,6 @@
 {
   "name": "@blued-core/qconf",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-qconf": "^0.2.0",
+    "node-qconf": "^0.4.2",
     "typescript": "^3.4.3"
   },
   "devDependencies": {
