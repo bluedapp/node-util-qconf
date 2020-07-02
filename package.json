@@ -1,6 +1,6 @@
 {
   "name": "@blued-core/qconf",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -14,14 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.blued.cn/node-util/blued-qconf.git"
+    "url": "git@github.com:bluedapp/node-util-qconf.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-qconf": "^0.4.2",
-    "typescript": "^3.4.3"
+    "node-qconf": "^0.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
@@ -37,7 +36,8 @@
     "eslint-plugin-import": "^2.16.0",
     "husky": "^1.3.1",
     "mocha": "^6.1.4",
-    "ts-node": "^8.0.3"
+    "ts-node": "^8.0.3",
+    "typescript": "^3.9.6"
   },
   "husky": {
     "hooks": {
